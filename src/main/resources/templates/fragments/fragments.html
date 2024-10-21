@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" xmlsi="https://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header th:fragment="main-header">
+      <nav>
+        <ul>
+          <li><a th:href="@{/home}">Inicio</a></li>
+          <li><a th:href="@{/info}">Quiénes somos</a></li>
+        </ul>
+      </nav>
+    </header>
+  </body>
+</html>
