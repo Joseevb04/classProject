@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class HomeController {
 
-    @GetMapping({ "/", "/index" })
+    @GetMapping({ "/", "/home", "/index" })
     public String showHome(Model model) {
         model.addAttribute("currentYear", LocalDate.now().getYear());
         return "indexView";

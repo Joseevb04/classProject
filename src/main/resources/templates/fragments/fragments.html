@@ -1,21 +1,50 @@
 <!doctype html>
 <html lang="en" xmlsi="https://thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <th:block th:fragment="main-head">
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+      <script
+        src="/webjars/bootstrap/js/bootstrap.bundle.min.js"
+        defer
+      ></script>
+    </th:block>
   </head>
   <body>
-    <header th:fragment="main-header">
-      <nav>
-        <ul>
-          <li><a th:href="@{/home}">Inicio</a></li>
-          <li><a th:href="@{/info}">Quiénes somos</a></li>
-        </ul>
+    <header th:fragment="main-header" class="w-100 bg-light shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
+        <div class="container-fluid">
+          <a class="navbar-brand" th:href="@{/home}">ReadME</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex flex-row gap-3">
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/info}">Quiénes somos</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
     </header>
-    <footer th:fragment="main-footer">
-      <p>©️ <span th:text="${currentYear}">1999</span></p>
+
+    <footer th:fragment="main-footer" class="footer mt-auto py-3 bg-light">
+      <div class="container text-center">
+        <p class="mb-0">
+          ©️ <span th:text="${currentYear}">1999</span>. Todos los derechos
+          reservados
+        </p>
+      </div>
     </footer>
   </body>
 </html>
