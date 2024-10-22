@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block th:insert="~{/fragments/fragments.html::main-head}"></th:block>
     <title>Home</title>
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <header th:replace="~{/fragments/fragments.html::main-header}"></header>
     <h1>Hello World</h1>
     <footer th:replace="~{/fragments/fragments.html::main-footer}"></footer>
