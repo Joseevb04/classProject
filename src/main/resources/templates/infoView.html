@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Home</title>
+	</head>
+	<body>
+		<header th:replace="~{/fragments/fragments.html::main-header}"></header>
+		<h1>Team JV</h1>
+		<p>
+        Team JV somos un grupo en alas de desarrollo, tal vez nos conozcas por nuestros cursos para los mas jovenes
+        en el ambito de desarrollo de aplicaciones moviles.
+        Esta vez os presentamos un proyecto que consideramos de grean utilidad para 
+        avidos de la lectura como nosotros.
+        por ahora solo somos 2, los fundadores y unicos participantes, más esperamos crecer.
+      </p>
+      <table>
+        <thead>Fundadores</thead>
+        <tr>
+            <td><img th:src="@{/img/fundador1.jpg}"></td>
+            <td><img th:src="@{/img/fundador2.jpg}"></td>
+        </tr>
+        <tr>
+            <td>tuVenezolanoFavorito</td>
+            <td>Sr. Jevi</td>
+        </tr>
+      </table>
+    <p><img src="../static/img/proyecto.png" alt="proyect"></p>
+    </p>
+		<footer th:replace="~{/fragments/fragments.html::main-footer}"></footer>
+	</body>
+</html>
