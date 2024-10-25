@@ -16,5 +16,8 @@ public class HomeController {
         model.addAttribute("currentYear", LocalDate.now().getYear());
         return "indexView";
     }
-
+    @GetMapping({"/info"})
+    public String showInfo() {
+        return "infoView";
+    }
 }
