@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<th:block
@@ -8,15 +8,22 @@
 	</head>
 	<body class="d-flex flex-column min-vh-100">
 		<header th:replace="~{/fragments/fragments.html::main-header}"></header>
-		<h1>ReadME</h1>
-		<p>
-			Tu gestor de lectura personal
-			<br />
-			Un espacio personal donde guardar tu progreso, tu lista de
-			lectura(leidos y por leer). muestra al mundo tus grandes pasiones y
-			opiniones;
-		</p>
-		<p><img th:src="@{/img/project.jpg}" /></p>
+		<main>
+			<h1>ReadME</h1>
+			<p>
+				Tu gestor de lectura personal
+				<br />
+				Un espacio personal donde guardar tu progreso, tu lista de
+				lectura(leidos y por leer). muestra al mundo tus grandes
+				pasiones y opiniones;
+			</p>
+
+			<section class="container">
+				<article th:each="book : ${books}">
+					<h2 th:text="${book.title}"></h2>
+				</article>
+			</section>
+		</main>
 		<footer th:replace="~{/fragments/fragments.html::main-footer}"></footer>
 	</body>
 </html>

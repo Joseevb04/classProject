@@ -5,19 +5,27 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import es.dws.classProject.services.BookService;
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/")
+@RequiredArgsConstructor
 public class HomeController {
 
+    private final BookService bookService;
+
     @GetMapping({ "/", "/home", "/index" })
-    public String showHome(Model model) {
+    public String showHome(final Model model) {
+
         model.addAttribute("currentYear", LocalDate.now().getYear());
+        model.addAttribute("books", bookService.getBooks());
         return "indexView";
     }
-    @GetMapping({"/info"})
-    public String showInfo() {
+
+    @GetMapping({ "/info" })
+    public String showInfo(final Model model) {
+        model.addAttribute("currentYear", LocalDate.now().getYear());
         return "infoView";
     }
 }
