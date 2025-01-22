@@ -10,6 +10,8 @@ import es.dws.classProject.domain.entities.BookEntity;
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
+    Optional<BookEntity> findByTitleContaining(String title);
+
     Optional<BookEntity> findByGenre(String genre);
 
     Optional<BookEntity> findByLanguage(String language);

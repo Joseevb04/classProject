@@ -16,6 +16,8 @@ public interface BookService {
 
     void deleteBookById(Long id);
 
+    List<BookDTO> getBooksByTitleMatching(String title);
+
     List<BookDTO> getBooksByGenre(String genre);
 
     List<BookDTO> getBooksByLanguage(String language);

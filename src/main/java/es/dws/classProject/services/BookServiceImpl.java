@@ -44,13 +44,26 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO updateBookById(Long id, BookDTO data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateBookById'");
+        return bookMapper.toDTO(bookRepository.findById(id)
+                .map(previousBook -> {
+
+                    bookMapper.updateBookFromDTO(data, previousBook);
+                    return bookRepository.save(previousBook);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("Could not find Book by the ID: %d".formatted(id))));
     }
 
     @Override
     public void deleteBookById(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BookDTO> getBooksByTitleMatching(String title) {
+        return bookRepository.findByTitleContaining(title)
+                .stream()
+                .map(bookMapper::toDTO)
+                .toList();
     }
 
     @Override
