@@ -19,8 +19,108 @@
 			</p>
 
 			<section class="container">
-				<article th:each="book : ${books}">
-					<h2 th:text="${book.title}"></h2>
+				<nav>
+					<form
+						action="#"
+						th:action="@{/book/search}"
+						method="get"
+						class="d-flex flex-column justify-content-center gap-3"
+					>
+						<div class="d-flex flex-row gap-3">
+							<!-- Input for title -->
+							<input
+								type="text"
+								name="title"
+								class="form-control"
+								placeholder="Buscar libro por título"
+							/>
+
+							<!-- Submit and reset buttons -->
+							<button type="submit" class="btn btn-primary">
+								Buscar
+							</button>
+							<a th:href="@{/home}" class="btn btn-secondary"
+								>Vaciar</a
+							>
+						</div>
+
+						<div class="d-flex flex-row gap-3 align-items-center">
+							<!-- Dropdown button to toggle genres -->
+							<button
+								class="btn btn-secondary"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#genreDropdown"
+								aria-expanded="false"
+								aria-controls="genreDropdown"
+							>
+								Filtros de Género
+							</button>
+
+							<!-- Collapsible genres dropdown -->
+							<div class="collapse" id="genreDropdown">
+								<select
+									name="genre"
+									class="form-select"
+									title="Género"
+								>
+									<option value="" selected>
+										Todos los géneros
+									</option>
+									<option
+										th:each="genre : ${genres}"
+										th:value="${genre}"
+										th:text="${genre}"
+									></option>
+								</select>
+							</div>
+						</div>
+					</form>
+				</nav>
+
+				<article
+					th:unless="${books.isEmpty()}"
+					th:each="book : ${books}"
+					class="card my-3"
+				>
+					<header class="card-header">
+						<h2>
+							<a
+								th:href="@{/book/{id}(id=${book.id})}"
+								th:text="${book.title}"
+							></a>
+						</h2>
+					</header>
+
+					<main class="card-body">
+						<p>Autor: <span th:text="${book.author}"></span></p>
+						<p>Género: <span th:text="${book.genre}"></span></p>
+						<p>Idioma: <span th:text="${book.language}"></span></p>
+						<p>
+							Año de lanzamiento:
+							<span th:text="${book.releaseYear}"></span>
+						</p>
+					</main>
+
+					<div class="container my-3">
+						<a
+							th:href="@{/book/edit/{id}(id=${book.id})}"
+							class="btn btn-primary"
+							>Editar</a
+						>
+
+						<a
+							th:href="@{/book/delete/{id}(id=${book.id})}"
+							class="btn btn-danger"
+							>Borrar</a
+						>
+					</div>
+				</article>
+
+				<article th:if="${books.isEmpty()}" class="card my-3">
+					<header class="card-header">
+						<h2>No hay libros</h2>
+					</header>
 				</article>
 			</section>
 		</main>

@@ -1,6 +1,6 @@
 package es.dws.classProject.repositories;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,10 +10,12 @@ import es.dws.classProject.domain.entities.BookEntity;
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
-    Optional<BookEntity> findByTitleContaining(String title);
+    List<BookEntity> findByTitleContainingIgnoreCase(String title);
 
-    Optional<BookEntity> findByGenre(String genre);
+    List<BookEntity> findByGenreIgnoreCase(String genre);
 
-    Optional<BookEntity> findByLanguage(String language);
+    List<BookEntity> findByTitleContainingAndGenreIgnoreCase(String title, String genre);
+
+    List<BookEntity> findByLanguageIgnoreCase(String language);
 
 }

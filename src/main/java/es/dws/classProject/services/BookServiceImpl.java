@@ -1,10 +1,13 @@
 package es.dws.classProject.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import es.dws.classProject.domain.dtos.AddBookRequestDTO;
 import es.dws.classProject.domain.dtos.BookDTO;
+import es.dws.classProject.domain.entities.BookEntity;
 import es.dws.classProject.mappers.BookMapper;
 import es.dws.classProject.repositories.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -35,15 +38,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDTO addBook(BookDTO bookDTO) {
+    public BookDTO addBook(AddBookRequestDTO data) {
 
-        log.info("Adding book: {}", bookDTO.toString());
+        log.info("Adding book: {}", data.toString());
 
-        return bookMapper.toDTO(bookRepository.save(bookMapper.toEntity(bookDTO)));
+        final BookEntity entity = bookMapper.toEntity(data);
+        entity.setCreatedAt(LocalDate.now());
+
+        return bookMapper.toDTO(bookRepository.save(entity));
     }
 
     @Override
-    public BookDTO updateBookById(Long id, BookDTO data) {
+    public BookDTO updateBookById(Long id, AddBookRequestDTO data) {
         return bookMapper.toDTO(bookRepository.findById(id)
                 .map(previousBook -> {
 
@@ -60,7 +66,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDTO> getBooksByTitleMatching(String title) {
-        return bookRepository.findByTitleContaining(title)
+        return bookRepository.findByTitleContainingIgnoreCase(title)
                 .stream()
                 .map(bookMapper::toDTO)
                 .toList();
@@ -68,7 +74,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDTO> getBooksByGenre(String genre) {
-        return bookRepository.findByGenre(genre)
+        return bookRepository.findByGenreIgnoreCase(genre)
+                .stream()
+                .map(bookMapper::toDTO)
+                .toList();
+    }
+
+    @Override
+    public List<BookDTO> getBooksByTitleAndGenre(String title, String genre) {
+        return bookRepository.findByTitleContainingAndGenreIgnoreCase(title, genre)
                 .stream()
                 .map(bookMapper::toDTO)
                 .toList();
@@ -76,7 +90,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDTO> getBooksByLanguage(String language) {
-        return bookRepository.findByLanguage(language)
+        return bookRepository.findByLanguageIgnoreCase(language)
                 .stream()
                 .map(bookMapper::toDTO)
                 .toList();

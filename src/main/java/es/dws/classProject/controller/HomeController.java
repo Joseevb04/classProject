@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import es.dws.classProject.enumerations.GenreEnum;
 import es.dws.classProject.services.BookService;
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ public class HomeController {
 
         model.addAttribute("currentYear", LocalDate.now().getYear());
         model.addAttribute("books", bookService.getBooks());
+        model.addAttribute("genres", GenreEnum.values());
         return "indexView";
     }
 

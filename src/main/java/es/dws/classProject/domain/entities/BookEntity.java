@@ -46,7 +46,7 @@ public class BookEntity {
     @Enumerated(EnumType.STRING)
     private LanguageEnum language;
 
-    @Column(name = "sinopsis", nullable = false, length = 300)
+    @Column(name = "synopsis", nullable = false, length = 300)
     private String synopsis;
 
     @Column(name = "created_at", nullable = false)

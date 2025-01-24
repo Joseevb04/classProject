@@ -1,7 +1,5 @@
 package es.dws.classProject.domain.dtos;
 
-import java.time.LocalDate;
-
 import es.dws.classProject.enumerations.GenreEnum;
 import es.dws.classProject.enumerations.LanguageEnum;
 import jakarta.validation.constraints.NotBlank;
@@ -10,15 +8,13 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@ToString
+@NoArgsConstructor
 @AllArgsConstructor
-public class BookDTO {
-
-    private Long id;
+public class AddBookRequestDTO {
 
     @NotBlank(message = "El título no puede estar vacío")
     private String title;
@@ -38,8 +34,5 @@ public class BookDTO {
     @Size(max = 300, message = "La sinopsis debe tener un máximo de 300 caracteres")
     @NotBlank(message = "La sinopsis no puede estar vacía")
     private String synopsis;
-
-    @Builder.Default
-    private LocalDate createdAt = LocalDate.now();
 
 }

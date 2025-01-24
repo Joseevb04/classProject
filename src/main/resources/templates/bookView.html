@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<th:block
+			th:insert="~{/fragments/fragments.html::main-head}"
+		></th:block>
+		<title>Book</title>
+	</head>
+	<body class="d-flex flex-column min-vh-100">
+		<header th:replace="~{/fragments/fragments.html::main-header}"></header>
+		<main>
+			<h1 th:text="${book.title}"></h1>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Información del libro</h2>
+                        <p>Título: <span th:text="${book.title}"></span></p>
+                        <p>Autor: <span th:text="${book.author}"></span></p>
+                        <p>Género: <span th:text="${book.genre}"></span></p>
+                        <p>Idioma: <span th:text="${book.language}"></span></p>
+                        <p>Año de lanzamiento: <span th:text="${book.releaseYear}"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Descripción</h2>
+                        <p th:text="${book.synopsis}"></p>
+                    </div>
+                </div> 
+		</main>
+
+		<footer th:replace="~{/fragments/fragments.html::main-footer}"></footer>
+	</body>
+</html>
