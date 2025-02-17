@@ -6,16 +6,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import es.dws.classProject.domain.entities.BookEntity;
+import es.dws.classProject.enumerations.GenreEnum;
 
 @Repository
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     List<BookEntity> findByTitleContainingIgnoreCase(String title);
 
-    List<BookEntity> findByGenreIgnoreCase(String genre);
+    List<BookEntity> findByGenre(GenreEnum genre);
 
-    List<BookEntity> findByTitleContainingAndGenreIgnoreCase(String title, String genre);
+    List<BookEntity> findByTitleContainingIgnoreCaseAndGenre(String title, GenreEnum genre);
 
-    List<BookEntity> findByLanguageIgnoreCase(String language);
+    List<BookEntity> findByLanguage(String language);
 
 }

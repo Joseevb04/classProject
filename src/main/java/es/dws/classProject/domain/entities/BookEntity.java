@@ -2,15 +2,17 @@ package es.dws.classProject.domain.entities;
 
 import java.time.LocalDate;
 
-import es.dws.classProject.enumerations.GenreEnum;
 import es.dws.classProject.enumerations.LanguageEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,10 +37,6 @@ public class BookEntity {
     @Column(name = "release_year", nullable = false)
     private Integer releaseYear;
 
-    @Column(name = "genre", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private GenreEnum genre;
-
     @Column(name = "author", nullable = false)
     private String author;
 
@@ -52,4 +50,10 @@ public class BookEntity {
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 
+    @Column(name = "imageUrl", nullable = true)
+    private String imageUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_id", nullable = false)
+    private GenreEntity genre;
 }

@@ -11,7 +11,7 @@
 	<groupId>es.dws</groupId>
 	<artifactId>classProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>classProject</name>
 	<description>Class project in springboot</description>
 	<url/>
@@ -152,16 +152,14 @@
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
                         </path>
-                        <dependency>
+                        <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok-mapstruct-binding</artifactId>
                             <version>0.2.0</version>
-                        </dependency>
+                        </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <compilerArg>
-                        -Amapstruct.defaultComponentModel=spring
-                        </compilerArg>
+                        <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>

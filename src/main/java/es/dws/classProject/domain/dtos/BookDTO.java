@@ -42,4 +42,7 @@ public class BookDTO {
     @Builder.Default
     private LocalDate createdAt = LocalDate.now();
 
+    @NotBlank
+    private String imageUrl;
+
 }

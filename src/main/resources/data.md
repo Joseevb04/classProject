@@ -1,6 +1,6 @@
 -- Insert test data into the book table
 
-INSERT INTO book (title, release_year, genre, author, language, synopsis, created_at) VALUES
+INSERT INTO book (title, release_year, genre_id, author, language, synopsis, created_at) VALUES
 ('El Quijote', 1605, 'ADVENTURE', 'Miguel de Cervantes', 'ES', 'Un caballero y su escudero en aventuras épicas.', '2025-01-01'),
 ('1984', 1949, 'SCI_FI', 'George Orwell', 'EN', 'Una distopía sobre el control y la vigilancia.', '2025-01-01'),
 ('Os Lusiadas', 1572, 'FANTASY', 'Luís de Camões', 'PT', 'Una epopeya sobre los exploradores portugueses.', '2025-01-01'),
@@ -11,3 +11,6 @@ INSERT INTO book (title, release_year, genre, author, language, synopsis, create
 ('Los Crímenes de la Calle Morgue', 1841, 'CRIME', 'Edgar Allan Poe', 'ES', 'El primer misterio de asesinato moderno.', '2025-01-01'),
 ('La Sombra del Viento', 2001, 'THRILLER', 'Carlos Ruiz Zafón', 'ES', 'Un thriller literario ambientado en Barcelona.', '2025-01-01'),
 ('Dune', 1965, 'SCI_FI', 'Frank Herbert', 'EN', 'Una obra maestra de la ciencia ficción sobre política y ecología.', '2025-01-01');
+
+insert into book (title, release_year, genre_id, author, language, synopsis, created_at, image_url) VALUES
+('test', 2000, 'SCI_FI', 'test', 'ES', 'test', '2025-01-01', '1739820077337.png');

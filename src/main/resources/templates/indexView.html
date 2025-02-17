@@ -25,6 +25,7 @@
 						th:action="@{/book/search}"
 						method="get"
 						class="d-flex flex-column justify-content-center gap-3"
+						enctype="multipart/form-data"
 					>
 						<div class="d-flex flex-row gap-3">
 							<!-- Input for title -->
@@ -83,7 +84,12 @@
 					th:each="book : ${books}"
 					class="card my-3"
 				>
-					<header class="card-header">
+					<header class="card-header d-flex align-items-end gap-3">
+						<img
+							th:src="@{/img/{imageName}(imageName=${book.imageUrl})}"
+							th:alt="${book.imageUrl}"
+							class="rounded"
+						/>
 						<h2>
 							<a
 								th:href="@{/book/{id}(id=${book.id})}"
@@ -113,6 +119,10 @@
 							th:href="@{/book/delete/{id}(id=${book.id})}"
 							class="btn btn-danger"
 							>Borrar</a
+						>
+
+						<a th:href="@{/book/ratings/}" class="btn btn-info"
+							>Valoraciones</a
 						>
 					</div>
 				</article>

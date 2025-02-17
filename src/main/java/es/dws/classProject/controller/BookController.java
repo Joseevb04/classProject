@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.dws.classProject.domain.dtos.AddBookRequestDTO;
 import es.dws.classProject.domain.dtos.BookDTO;
 import es.dws.classProject.enumerations.GenreEnum;
 import es.dws.classProject.enumerations.LanguageEnum;
 import es.dws.classProject.services.BookService;
+import es.dws.classProject.services.RatingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class BookController {
 
+    private final RatingService ratingService;
     private final BookService bookService;
 
     @GetMapping("/{id}")
@@ -102,12 +106,23 @@ public class BookController {
         return "redirect:/";
     }
 
-    @PostMapping("/add")
-    public String addBook(@ModelAttribute final AddBookRequestDTO data) {
+    @GetMapping("/ratings/{id}")
+    public String showRatings(@PathVariable final Long id, final Model model) {
+
+        model.addAttribute("ratings", ratingService.geRatingsByBookId(id));
+        model.addAttribute("currentYear", LocalDate.now().getYear());
+
+        return "ratingsView";
+    }
+
+    @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String addBook(
+            @ModelAttribute final AddBookRequestDTO data,
+            @RequestParam("image") MultipartFile image) {
 
         log.info("Initializing the book saving process - Controller Layer: {}", data.toString());
 
-        bookService.addBook(data);
+        bookService.addBook(data, image);
         return "redirect:/?success=1";
     }
 
