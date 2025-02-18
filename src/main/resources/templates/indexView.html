@@ -121,7 +121,9 @@
 							>Borrar</a
 						>
 
-						<a th:href="@{/book/ratings/}" class="btn btn-info"
+						<a
+							th:href="@{/book/ratings/{bookId}(bookId=${book.id})}"
+							class="btn btn-info"
 							>Valoraciones</a
 						>
 					</div>

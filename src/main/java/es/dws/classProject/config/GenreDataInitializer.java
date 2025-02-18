@@ -2,10 +2,15 @@ package es.dws.classProject.config;
 
 import es.dws.classProject.domain.entities.BookEntity;
 import es.dws.classProject.domain.entities.GenreEntity;
+import es.dws.classProject.domain.entities.RatingEntity;
+import es.dws.classProject.domain.entities.UserEntity;
+import es.dws.classProject.domain.entities.keys.RatingEntityKey;
 import es.dws.classProject.enumerations.GenreEnum;
 import es.dws.classProject.enumerations.LanguageEnum;
 import es.dws.classProject.repositories.BookRepository;
 import es.dws.classProject.repositories.GenreRepository;
+import es.dws.classProject.repositories.RatingRepository;
+import es.dws.classProject.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +26,8 @@ import org.springframework.stereotype.Component;
 public class GenreDataInitializer implements CommandLineRunner {
 
     private final GenreRepository genreRepository;
+    private final UserRepository userRepository;
+    private final RatingRepository ratingRepository;
     private final BookRepository bookRepository;
 
     @Override
@@ -160,6 +167,51 @@ public class GenreDataInitializer implements CommandLineRunner {
                             .synopsis("Una obra maestra de la ciencia ficción sobre política y ecología.")
                             .createdAt(LocalDate.parse("2025-01-01"))
                             .build()));
+        }
+
+        if (userRepository.count() == 0) {
+            List<UserEntity> users = List.of(
+                    UserEntity.builder().username("user1").password("password1").build(),
+                    UserEntity.builder().username("user2").password("password2").build(),
+                    UserEntity.builder().username("user3").password("password3").build(),
+                    UserEntity.builder().username("user4").password("password4").build(),
+                    UserEntity.builder().username("user5").password("password5").build());
+            userRepository.saveAll(users);
+        }
+
+        if (ratingRepository.count() == 0) {
+            final List<RatingEntity> ratings = List.of(
+                    new RatingEntity(new RatingEntityKey(1L, 1L),
+                            userRepository.findById(1L).orElse(null),
+                            bookRepository.findById(1L)
+                                    .orElseThrow(() -> new EntityNotFoundException("Book not found with id 1")),
+                            5,
+                            "Una obra maestra de la literatura española."),
+                    new RatingEntity(new RatingEntityKey(2L, 2L),
+                            userRepository.findById(2L).orElse(null),
+                            bookRepository.findById(2L)
+                                    .orElseThrow(() -> new EntityNotFoundException("Book not found with id 2")),
+                            4,
+                            "Un libro visionario y perturbador."),
+                    new RatingEntity(new RatingEntityKey(3L, 3L),
+                            userRepository.findById(3L).orElse(null),
+                            bookRepository.findById(3L)
+                                    .orElseThrow(() -> new EntityNotFoundException("Book not found with id 3")),
+                            5,
+                            "Un clásico de la poesía épica."),
+                    new RatingEntity(new RatingEntityKey(4L, 4L),
+                            userRepository.findById(4L).orElse(null),
+                            bookRepository.findById(4L)
+                                    .orElseThrow(() -> new EntityNotFoundException("Book not found with id 4")),
+                            3,
+                            "Interesante, pero un poco anticuado."),
+                    new RatingEntity(new RatingEntityKey(5L, 5L),
+                            userRepository.findById(5L).orElse(null),
+                            bookRepository.findById(5L)
+                                    .orElseThrow(() -> new EntityNotFoundException("Book not found with id 5")),
+                            4,
+                            "Me encantó el ambiente oscuro."));
+            ratingRepository.saveAll(ratings);
         }
     }
 }

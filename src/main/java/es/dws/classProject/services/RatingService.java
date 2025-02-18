@@ -8,9 +8,9 @@ public interface RatingService {
 
     RatingDTO addRating(RatingDTO rating);
 
-    List<RatingDTO> geRatingsByBookId(Long id);
+    List<RatingDTO> getRatingsByBookId(Long id);
 
-    List<RatingDTO> geRatingsByUserId(Long id);
+    List<RatingDTO> getRatingsByUserId(Long id);
 
     void deleteRatingById(Long userId, Long bookId);
 

@@ -109,7 +109,8 @@ public class BookController {
     @GetMapping("/ratings/{id}")
     public String showRatings(@PathVariable final Long id, final Model model) {
 
-        model.addAttribute("ratings", ratingService.geRatingsByBookId(id));
+        model.addAttribute("ratings", ratingService.getRatingsByBookId(id));
+        model.addAttribute("book", bookService.getBookById(id));
         model.addAttribute("currentYear", LocalDate.now().getYear());
 
         return "ratingsView";

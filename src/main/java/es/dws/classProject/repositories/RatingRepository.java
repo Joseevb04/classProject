@@ -1,6 +1,6 @@
 package es.dws.classProject.repositories;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,8 +11,8 @@ import es.dws.classProject.domain.entities.keys.RatingEntityKey;
 @Repository
 public interface RatingRepository extends JpaRepository<RatingEntity, RatingEntityKey> {
 
-    Optional<RatingEntity> findByUserId(Long userId);
+    List<RatingEntity> findAllByUserId(Long userId);
 
-    Optional<RatingEntity> findByBookId(Long bookId);
+    List<RatingEntity> findAllByBookId(Long bookId);
 
 }

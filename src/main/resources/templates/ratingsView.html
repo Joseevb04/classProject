@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<th:block
+			th:insert="~{/fragments/fragments.html::main-head}"
+		></th:block>
+		<title>Reseñas</title>
+	</head>
+	<body>
+		<header th:replace="~{/fragments/fragments.html::main-header}"></header>
+
+		<main class="container">
+			<section class="card d-flex m-3">
+				<header class="card-header">
+					<h2>
+						Reseñas del libro: <span th:text="${book.title}"></span>
+					</h2>
+				</header>
+				<main class="card-body">
+					<article class="card" th:each="rating : ${ratings}">
+						<header class="card-header">
+							<h2 th:text="${rating.username}"></h2>
+						</header>
+						<main class="card-body">
+							<p>
+								Valoración:
+								<span th:text="${rating.rating}"></span>
+							</p>
+							<p>
+								Comentario:
+								<span th:text="${rating.comment}"></span>
+							</p>
+						</main>
+					</article>
+				</main>
+
+				<footer class="container d-inline-flex gap-3 my-3">
+					<a
+						class="btn btn-primary"
+						th:href="@{/ratings/add/{bookId}(bookId=${book.id})}"
+						>Agregar</a
+					>
+					<a class="btn btn-secondary" th:href="@{/}">Volver</a>
+				</footer>
+			</section>
+		</main>
+
+		<footer th:replace="~{/fragments/fragments.html::main-footer}"></footer>
+	</body>
+</html>

@@ -6,12 +6,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import es.dws.classProject.domain.dtos.AddBookRequestDTO;
 import es.dws.classProject.domain.dtos.BookDTO;
+import es.dws.classProject.domain.entities.BookEntity;
 
 public interface BookService {
 
     List<BookDTO> getBooks();
 
     BookDTO getBookById(Long id);
+
+    BookEntity getBookEntityById(Long id);
 
     BookDTO addBook(AddBookRequestDTO data, MultipartFile image);
 

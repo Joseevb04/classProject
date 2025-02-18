@@ -1,19 +1,17 @@
 package es.dws.classProject.domain.dtos;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RatingDTO {
+public class UserDTO {
 
-    private Long userId;
-    private Long bookId;
-    private Integer rating;
-    private String comment;
-
+    private Long id;
     private String username;
-
+    private String password;
 }

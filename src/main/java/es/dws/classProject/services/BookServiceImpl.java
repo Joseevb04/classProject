@@ -43,6 +43,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public BookEntity getBookEntityById(Long id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Could not find Book by the ID: %d".formatted(id)));
+    }
+
+    @Override
     public BookDTO addBook(AddBookRequestDTO data, MultipartFile image) {
 
         log.info("Adding book: {}", data.toString());
