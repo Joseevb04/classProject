@@ -1,5 +1,7 @@
 package es.dws.classProject.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import es.dws.classProject.domain.dtos.UserDTO;
@@ -15,6 +17,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+
+    @Override
+    public List<UserDTO> getUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toDTO)
+                .toList();
+    }
 
     @Override
     public UserDTO getUserById(Long id) {

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<th:block
+			th:insert="~{/fragments/fragments.html::main-head}"
+		></th:block>
+		<title>Agregar Valoracion</title>
+	</head>
+	<body>
+		<header th:replace="~{/fragments/fragments.html::main-header}"></header>
+
+		<main class="container">
+			<h2>Agregar valoracion</h2>
+			<form action="#" th:action="@{/ratings/add}" method="post">
+				<input type="hidden" name="bookId" th:value="${bookId}" />
+
+				<div class="form-group my-3">
+					<label for="user" class="form-label">Usuario</label>
+					<select name="userId" id="user" class="form-control">
+						<option disabled selected>Seleccione un usuario</option>
+						<option
+							th:each="user : ${users}"
+							th:text="${user.username}"
+							th:value="${user.id}"
+						></option>
+					</select>
+				</div>
+				<div class="form-group my-3">
+					<label for="rating" class="form-label">Valoracion</label>
+					<input
+						type="number"
+						min="1"
+						max="10"
+						name="rating"
+						id="rating"
+						class="form-control"
+						required
+					/>
+				</div>
+
+				<div class="form-group my-3">
+					<label for="comment" class="form-label">Comentario</label>
+					<input
+						type="text"
+						class="form-control"
+						name="comment"
+						id="comment"
+						required
+					/>
+				</div>
+
+				<div class="form-group my-5">
+					<button type="submit" class="btn btn-primary">
+						Enviar
+					</button>
+					<a
+						th:href="@{/book/ratings/{bookId}(bookId=${bookId})}"
+						class="btn btn-secondary"
+						>Volver</a
+					>
+				</div>
+			</form>
+		</main>
+
+		<footer th:replace="~{/fragments/fragments.html::main-footer}"></footer>
+	</body>
+</html>
